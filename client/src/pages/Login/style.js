@@ -7,7 +7,7 @@ export const FormWrapper = styled.div`
 
 export const Title = styled.h1`
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 `;
 
 export const InputGroup = styled.div`

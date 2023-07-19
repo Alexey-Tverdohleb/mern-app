@@ -11,7 +11,6 @@ const Header = () => {
             <NavLinkItem to="/">Home</NavLinkItem>
             <NavLinkItem to="login">Login</NavLinkItem>
             <NavLinkItem to="registration">Registration</NavLinkItem>
-            <NavLinkItem to="activation">Activation</NavLinkItem>
           </nav>
         </NavRow>
       </Container>

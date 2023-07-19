@@ -11,3 +11,11 @@ body {
 a {
     text-decoration: none;
 }
+
+input {
+    outline: none;
+}
+
+input:focus {
+    outline: none;
+}
