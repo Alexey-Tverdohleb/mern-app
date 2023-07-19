@@ -1,7 +1,5 @@
-const App = () => (
-  <div>
-    <h1>MERN Stack AUTH App</h1>
-  </div>
-);
+import SignUpPage from './pages/Registration/index.jsx';
+
+const App = () => <SignUpPage />;
 
 export default App;

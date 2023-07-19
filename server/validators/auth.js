@@ -1,6 +1,6 @@
 import { check } from 'express-validator';
 
-export const userSignUpValidator = [
+export const userRegistrationValidator = [
   check('name').not().isEmpty().withMessage('Name is required.'),
   check('email').isEmail().withMessage('Must be a valid email address.'),
   check('password')
@@ -8,7 +8,7 @@ export const userSignUpValidator = [
     .withMessage('Password must be at least 6 characters long.'),
 ];
 
-export const userSignInValidator = [
+export const userLoginValidator = [
   check('email').not().isEmpty().withMessage('Email is required.'),
   check('password')
     .isLength({ min: 6 })

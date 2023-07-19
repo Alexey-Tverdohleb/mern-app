@@ -12,7 +12,7 @@ import {
   UNAUTHORIZED_401,
 } from '../constants/statusCodes.js';
 
-export const signUp = (req, res) => {
+export const registration = (req, res) => {
   sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
   const { name, email, password } = req.body;
 
@@ -65,7 +65,7 @@ export const signUp = (req, res) => {
     });
 };
 
-export const accountActivation = (req, res) => {
+export const activation = (req, res) => {
   const { token } = req.body;
 
   if (token) {
@@ -106,7 +106,7 @@ export const accountActivation = (req, res) => {
   }
 };
 
-export const signIn = (req, res) => {
+export const login = (req, res) => {
   const { email, password } = req.body;
 
   User.findOne({ email })
