@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 
+import { accentColor, lightGray } from '../../constants/colors';
+
 export const FormInput = styled.input`
-  background-color: #eee;
+  background-color: ${lightGray};
   border: none;
-  border-bottom: 2px solid #6e6e6e;
+  border-bottom: 2px solid ${lightGray};
   margin-bottom: 20px;
   padding: 15px;
   width: 100%;
+
+  &:focus {
+    border-bottom: 2px solid ${accentColor};
+  }
 `;
