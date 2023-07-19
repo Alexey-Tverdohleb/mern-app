@@ -1,5 +1,7 @@
-import SignUpPage from './pages/Registration/index.jsx';
+import { RouterProvider } from 'react-router-dom';
 
-const App = () => <SignUpPage />;
+import router from './routing';
+
+const App = () => <RouterProvider router={router} />;
 
 export default App;
