@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 import initialValues from './initialValues.js';
 
 const RegistrationForm = ({ children }) => {
-  const onSubmit = () => {};
+  const onSubmit = (values, formikActions) => {
+    console.log('Registration form', values);
+    formikActions.setSubmitting(false);
+  };
 
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit}>
