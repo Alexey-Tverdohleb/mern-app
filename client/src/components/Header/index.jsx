@@ -6,7 +6,7 @@ const Header = () => {
     <NavHeader>
       <Container>
         <NavRow>
-          <h2>App logo</h2>
+          <h2>MERN</h2>
           <nav>
             <NavLinkItem to="/">Home</NavLinkItem>
             <NavLinkItem to="login">Login</NavLinkItem>
