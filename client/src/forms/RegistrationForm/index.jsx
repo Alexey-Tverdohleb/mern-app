@@ -2,11 +2,14 @@ import { Formik, Form } from 'formik';
 import PropTypes from 'prop-types';
 
 import initialValues from './initialValues.js';
+import registerUser from '../../api/auth/registerUser.js';
 
 const RegistrationForm = ({ children }) => {
   const onSubmit = (values, formikActions) => {
-    console.log('Registration form', values);
-    formikActions.setSubmitting(false);
+    registerUser(values)
+      .then((response) => console.log(response))
+      .catch(console.error)
+      .finally(() => formikActions.setSubmitting(false));
   };
 
   return (
