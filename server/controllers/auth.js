@@ -14,7 +14,7 @@ import {
 
 export const registration = (req, res) => {
   sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
-  const { name, email, password } = req.body;
+  const { name, email, password, passwordRepeat } = req.body;
 
   // Check if a user with this email already exists
   User.findOne({ email })
@@ -23,7 +23,8 @@ export const registration = (req, res) => {
       if (user) {
         return res.status(BAD_REQUEST_400).json({
           error: true,
-          data: 'Email is taken.',
+          message: 'Email is taken.',
+          data: null,
         });
       }
     })
@@ -31,9 +32,18 @@ export const registration = (req, res) => {
       console.log('Sign up error:', error);
       return res.status(INTERNAL_ERROR_500).json({
         error: true,
-        data: error,
+        message: error,
+        data: null,
       });
     });
+
+  if (password !== passwordRepeat) {
+    return res.status(BAD_REQUEST_400).json({
+      error: true,
+      message: "Passwords don't match",
+      data: null,
+    });
+  }
 
   const token = jwt.sign({ name, email, password }, process.env.JWT_ACOUNT_ACTIVATION, {
     expiresIn: '10m',
@@ -53,14 +63,16 @@ export const registration = (req, res) => {
       console.log('SENT', sent);
       return res.status(OK_200).json({
         error: false,
-        data: `Email has been sent to ${email}`,
+        message: `Email has been sent to ${email}`,
+        data: null,
       });
     })
     .catch((error) => {
       console.log('Error while sending activation email', error);
       return res.status(UNAUTHORIZED_401).json({
         error: true,
-        data: error,
+        message: error,
+        data: null,
       });
     });
 };
@@ -74,7 +86,8 @@ export const activation = (req, res) => {
         console.log('JWT VERIFY IN ACCOUNT ACTIVATION ERROR', error);
         return res.status(UNAUTHORIZED_401).json({
           error: true,
-          data: 'Expired link. Sign up again.',
+          message: 'Expired link. Sign up again.',
+          data: null,
         });
       }
 
@@ -87,6 +100,7 @@ export const activation = (req, res) => {
         .then(() => {
           return res.status(OK_200).json({
             error: false,
+            message: 'New user was successfully created.',
             data: newUserData,
           });
         })
@@ -94,14 +108,16 @@ export const activation = (req, res) => {
           console.log('Error while saving the user', error);
           return res.status(UNAUTHORIZED_401).json({
             error: true,
-            data: 'Error while saving the user',
+            message: 'Error while saving the user.',
+            data: null,
           });
         });
     });
   } else {
     return res.status(INTERNAL_ERROR_500).json({
       error: true,
-      data: 'Something went wrong.',
+      message: 'Something went wrong.',
+      data: null,
     });
   }
 };
@@ -115,14 +131,16 @@ export const login = (req, res) => {
       if (!user) {
         return res.status(BAD_REQUEST_400).json({
           error: true,
-          data: 'User with this email does not exist. Please sign up.',
+          message: 'User with this email does not exist. Please sign up.',
+          data: null,
         });
       }
 
       if (!user.authenticate(password)) {
         return res.status(BAD_REQUEST_400).json({
           error: true,
-          data: 'Email or password are wrong.',
+          message: 'Email or password are wrong.',
+          data: null,
         });
       }
 
@@ -133,13 +151,15 @@ export const login = (req, res) => {
 
       return res.status(OK_200).json({
         error: false,
+        message: 'Successfully logged in.',
         data: { token, user: userData },
       });
     })
     .catch(() => {
       return res.status(BAD_REQUEST_400).json({
         error: true,
-        data: 'User with this email does not exist. Please sign up.',
+        message: 'User with this email does not exist. Please sign up.',
+        data: null,
       });
     });
 };
