@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import RootLayout from './RootLayout.jsx';
 import PrivateRoute from './PrivateRoute.jsx';
+import PublicRoute from './PublicRoute.jsx';
 import Home from '../pages/Home/index.jsx';
 import Dashboard from '../pages/Dashboard/index.jsx';
 import Management from '../pages/Management/index.jsx';
@@ -34,16 +35,22 @@ export default createBrowserRouter([
         ],
       },
       {
-        path: 'registration',
-        element: <Registration />,
-      },
-      {
-        path: 'login',
-        element: <Login />,
-      },
-      {
-        path: 'activation',
-        element: <Activation />,
+        path: '/',
+        element: <PublicRoute />,
+        children: [
+          {
+            path: 'registration',
+            element: <Registration />,
+          },
+          {
+            path: 'login',
+            element: <Login />,
+          },
+          {
+            path: 'activation',
+            element: <Activation />,
+          },
+        ],
       },
       {
         path: '*',
