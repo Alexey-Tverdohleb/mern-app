@@ -7,7 +7,7 @@ export const FormWrapper = styled.div`
 
 export const Title = styled.h1`
   text-align: center;
-  margin-bottom: 45px;
+  margin-bottom: 40px;
 `;
 
 export const InputGroup = styled.div`
@@ -15,4 +15,5 @@ export const InputGroup = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 `;
