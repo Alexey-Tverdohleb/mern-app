@@ -147,7 +147,6 @@ export const login = (req, res) => {
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
         expiresIn: '7d',
       });
-      const userData = pick(user, ['_id', 'name', 'email', 'role']);
 
       return res.status(OK_200).json({
         error: false,
@@ -162,4 +161,32 @@ export const login = (req, res) => {
         data: null,
       });
     });
+};
+
+export const checkToken = (req, res) => {
+  const { token } = req.body;
+
+  if (!token) {
+    return res.status(BAD_REQUEST_400).json({
+      error: true,
+      message: 'No auth token.',
+      data: null,
+    });
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (error) => {
+    if (error) {
+      return res.status(UNAUTHORIZED_401).json({
+        error: true,
+        message: 'Auth token is not valid',
+        data: null,
+      });
+    }
+
+    return res.status(OK_200).json({
+      error: false,
+      message: 'OK. Token is valid.',
+      data: null,
+    });
+  });
 };

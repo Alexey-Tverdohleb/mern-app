@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import AUTH_STATUS from '../../constants/auth';
 import { TOKEN } from '../../constants/localStorage.js';
 import authContext from './context.js';
+import checkToken from '../../api/auth/checkToken.js';
 
 const AuthProvider = ({ children }) => {
   const [authStatus, setAuthStatus] = useState(AUTH_STATUS.pending);
@@ -20,7 +21,14 @@ const AuthProvider = ({ children }) => {
       return;
     }
 
-    setAuthStatus(AUTH_STATUS.authed);
+    checkToken({ token: storageToken })
+      .then(() => {
+        setAuthStatus(AUTH_STATUS.authed);
+      })
+      .catch(() => {
+        window.localStorage.removeItem(TOKEN);
+        setAuthStatus(AUTH_STATUS.unauthorized);
+      });
   }, [location]);
 
   return <ProviderElement value={authStatus}>{children}</ProviderElement>;

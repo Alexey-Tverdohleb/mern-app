@@ -4,6 +4,9 @@ import { TOKEN } from '../constants/localStorage.js';
 
 const api = ky.extend({
   prefixUrl: import.meta.env.VITE_API_URL,
+  headers: {
+    'content-type': 'application/json',
+  },
   hooks: {
     beforeRequest: [
       (request) => {
