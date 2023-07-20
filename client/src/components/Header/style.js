@@ -14,7 +14,7 @@ export const NavRow = styled.div`
 `;
 
 export const NavLinkItem = styled(NavLink)`
-  margin-left: 15px;
+  margin-right: 15px;
   color: ${MEDIUM_GRAY};
   position: relative;
   font-weight: 700;
@@ -22,4 +22,14 @@ export const NavLinkItem = styled(NavLink)`
   &.active {
     color: ${ACCENT_COLOR};
   }
+`;
+
+export const Logout = styled.button`
+  background-color: transparent;
+  padding: 10px 1px;
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin-left: 15px;
 `;

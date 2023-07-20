@@ -1,12 +1,17 @@
 import Container from '../Container/index.jsx';
-import { NavHeader, NavRow, NavLinkItem } from './style.js';
+import { NavHeader, NavRow, NavLinkItem, Logout } from './style.js';
 import useAuth from '../../context/AuthContext/useAuth.js';
 import { privateLinks, publicLinks } from './links';
 import AUTH_STATUS from '../../constants/auth';
+import { TOKEN } from '../../constants/localStorage.js';
 
 const Header = () => {
-  const authStatus = useAuth();
-  const navLinks = authStatus === AUTH_STATUS.authed ? privateLinks : publicLinks;
+  const isAuthed = useAuth() === AUTH_STATUS.authed;
+  const navLinks = isAuthed ? privateLinks : publicLinks;
+
+  const handleLogout = () => {
+    window.localStorage.removeItem(TOKEN);
+  };
 
   return (
     <NavHeader>
@@ -19,6 +24,7 @@ const Header = () => {
                 {label}
               </NavLinkItem>
             ))}
+            {isAuthed && <Logout onClick={handleLogout}>Logout</Logout>}
           </nav>
         </NavRow>
       </Container>
