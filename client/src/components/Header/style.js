@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
-import { mediumGrey, accentColor } from '../../constants/colors';
+import { MEDIUM_GRAY, ACCENT_COLOR } from '../../constants/colors';
 
 export const NavHeader = styled.header`
   margin-bottom: 15px;
@@ -15,11 +15,11 @@ export const NavRow = styled.div`
 
 export const NavLinkItem = styled(NavLink)`
   margin-left: 15px;
-  color: ${mediumGrey};
+  color: ${MEDIUM_GRAY};
   position: relative;
   font-weight: 700;
 
   &.active {
-    color: ${accentColor};
+    color: ${ACCENT_COLOR};
   }
 `;

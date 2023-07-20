@@ -1,15 +1,25 @@
 import { Formik, Form } from 'formik';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
-import initialValues from './initialValues.js';
-import login from '../../api/auth/loginUser.js';
+import initialValues from './initialValues';
+import login from '../../api/auth/loginUser';
+import { TOKEN } from '../../constants/localStorage';
 
 const LoginForm = ({ children }) => {
-  const onSubmit = (values, formicActions) => {
-    login(values)
-      .then((response) => console.log(response))
-      .catch(console.error)
-      .finally(() => formicActions.setSubmitting(false));
+  const navigation = useNavigate();
+
+  const onSubmit = async (values, formikActions) => {
+    try {
+      const { data } = await login(values);
+      window.localStorage.setItem(TOKEN, data.token);
+      formikActions.resetForm();
+      navigation('/');
+    } catch (error) {
+      console.error(error);
+    }
+
+    formikActions.setSubmitting(false);
   };
 
   return (

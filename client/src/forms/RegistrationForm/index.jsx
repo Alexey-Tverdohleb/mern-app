@@ -5,11 +5,16 @@ import initialValues from './initialValues.js';
 import registerUser from '../../api/auth/registerUser.js';
 
 const RegistrationForm = ({ children }) => {
-  const onSubmit = (values, formikActions) => {
-    registerUser(values)
-      .then((response) => console.log(response))
-      .catch(console.error)
-      .finally(() => formikActions.setSubmitting(false));
+  const onSubmit = async (values, formikActions) => {
+    try {
+      const { message } = await registerUser(values);
+      formikActions.resetForm();
+      console.log(message);
+    } catch (error) {
+      console.error(error);
+    }
+
+    formikActions.setSubmitting(false);
   };
 
   return (

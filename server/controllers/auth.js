@@ -152,7 +152,7 @@ export const login = (req, res) => {
       return res.status(OK_200).json({
         error: false,
         message: 'Successfully logged in.',
-        data: { token, user: userData },
+        data: { token },
       });
     })
     .catch(() => {

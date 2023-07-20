@@ -1,7 +1,7 @@
-export const accentColor = '#0B4619';
+export const ACCENT_COLOR = '#0B4619';
 
-export const textWhite = '#FFF';
+export const TEXT_WHITE = '#FFF';
 
-export const lightGray = '#EEE';
+export const LIGHT_GRAY = '#EEE';
 
-export const mediumGrey = '#777';
+export const MEDIUM_GRAY = '#777';
