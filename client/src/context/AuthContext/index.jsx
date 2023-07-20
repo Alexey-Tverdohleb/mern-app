@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import AUTH_STATUS from '../../constants/auth';
@@ -7,6 +8,7 @@ import authContext from './context.js';
 
 const AuthProvider = ({ children }) => {
   const [authStatus, setAuthStatus] = useState(AUTH_STATUS.pending);
+  const location = useLocation();
 
   const ProviderElement = authContext.Provider;
 
@@ -19,7 +21,7 @@ const AuthProvider = ({ children }) => {
     }
 
     setAuthStatus(AUTH_STATUS.authed);
-  }, []);
+  }, [location]);
 
   return <ProviderElement value={authStatus}>{children}</ProviderElement>;
 };

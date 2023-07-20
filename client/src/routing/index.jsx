@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import Layout from './Layout.jsx';
+import RootLayout from './RootLayout.jsx';
 import PrivateRoute from './PrivateRoute.jsx';
 import Home from '../pages/Home/index.jsx';
 import Dashboard from '../pages/Dashboard/index.jsx';
@@ -13,7 +13,7 @@ import NotFound from '../pages/NotFound/index.jsx';
 export default createBrowserRouter([
   {
     path: '/',
-    element: <Layout />,
+    element: <RootLayout />,
     children: [
       {
         path: '/',
