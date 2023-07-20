@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 
 import authRouter from './routing/auth.js';
+import userRouter from './routing/user.js';
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(bodyParser.json());
 
 // middleware
 app.use('/api', authRouter);
+app.use('/api', userRouter);
 
 const PORT = process.env.PORT || 8000;
 
