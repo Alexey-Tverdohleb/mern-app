@@ -9,7 +9,7 @@ import useLocalStorage from '../../context/LocalStarageContext/useLocalStorage.j
 import validationScheme from './validation.js';
 
 const LoginForm = ({ children }) => {
-  const { showError, showSuccess } = useToast();
+  const { showSuccess } = useToast();
   const { setStorageItem } = useLocalStorage();
 
   const onSubmit = async (values, formikActions) => {
@@ -20,7 +20,10 @@ const LoginForm = ({ children }) => {
       showSuccess(message);
     } catch (error) {
       console.error(error);
-      showError(error.message);
+      formikActions.setErrors({
+        email: 'Email or password does not match.',
+        password: 'Email or password does not match.',
+      });
     }
 
     formikActions.setSubmitting(false);
