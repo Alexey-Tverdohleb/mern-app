@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import useToast from '../../context/ToastContext/useToast';
 import initialValues from './initialValues.js';
 import registerUser from '../../api/auth/registerUser.js';
+import validationScheme from './validation';
 
 const RegistrationForm = ({ children }) => {
   const { showError, showSuccess } = useToast();
@@ -23,7 +24,12 @@ const RegistrationForm = ({ children }) => {
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validationSchema={validationScheme}
+      validateOnBlur={false}
+      validateOnChange={false}>
       <Form>{children}</Form>
     </Formik>
   );

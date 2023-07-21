@@ -1,21 +1,25 @@
 import PropTypes from 'prop-types';
 import { useField, useFormikContext } from 'formik';
 
-import { FormInput } from './style';
+import { FormInput, InputError, InputWrapper } from './style';
 
 const Input = ({ name, type, placeholder, disabled }) => {
-  const [field] = useField({ name });
+  const [field, { error }] = useField({ name });
   const { isSubmitting } = useFormikContext();
 
   return (
-    <FormInput
-      type={type}
-      placeholder={placeholder}
-      name={field.name}
-      value={field.value}
-      onChange={field.onChange}
-      disabled={disabled || isSubmitting}
-    />
+    <InputWrapper>
+      <FormInput
+        type={type}
+        placeholder={placeholder}
+        name={field.name}
+        value={field.value}
+        onChange={field.onChange}
+        disabled={disabled || isSubmitting}
+        $error={error}
+      />
+      <InputError>{error}</InputError>
+    </InputWrapper>
   );
 };
 

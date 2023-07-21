@@ -6,6 +6,7 @@ import initialValues from './initialValues';
 import login from '../../api/auth/loginUser';
 import { TOKEN } from '../../constants/localStorage';
 import useLocalStorage from '../../context/LocalStarageContext/useLocalStorage.js';
+import validationScheme from './validation.js';
 
 const LoginForm = ({ children }) => {
   const { showError, showSuccess } = useToast();
@@ -26,7 +27,12 @@ const LoginForm = ({ children }) => {
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validationSchema={validationScheme}
+      validateOnBlur={false}
+      validateOnChange={false}>
       <Form>{children}</Form>
     </Formik>
   );
