@@ -6,16 +6,18 @@ import AUTH_STATUS from '../../constants/auth';
 import { TOKEN } from '../../constants/localStorage.js';
 import authContext from './context.js';
 import checkToken from '../../api/auth/checkToken.js';
+import useLocalStorage from '../LocalStarageContext/useLocalStorage.js';
 
 const AuthProvider = ({ children }) => {
   const [authStatus, setAuthStatus] = useState(AUTH_STATUS.pending);
+
   const location = useLocation();
+  const { getStorageItem, removeStorageItem } = useLocalStorage();
+  const storageToken = getStorageItem(TOKEN);
 
   const ProviderElement = authContext.Provider;
 
   useEffect(() => {
-    const storageToken = window.localStorage.getItem(TOKEN);
-
     if (!storageToken) {
       setAuthStatus(AUTH_STATUS.unauthorized);
       return;
@@ -26,10 +28,9 @@ const AuthProvider = ({ children }) => {
         setAuthStatus(AUTH_STATUS.authed);
       })
       .catch(() => {
-        window.localStorage.removeItem(TOKEN);
-        setAuthStatus(AUTH_STATUS.unauthorized);
+        removeStorageItem(TOKEN);
       });
-  }, [location]);
+  }, [location, storageToken]);
 
   return <ProviderElement value={authStatus}>{children}</ProviderElement>;
 };

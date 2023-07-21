@@ -4,13 +4,16 @@ import useAuth from '../../context/AuthContext/useAuth.js';
 import { privateLinks, publicLinks } from './links';
 import AUTH_STATUS from '../../constants/auth';
 import { TOKEN } from '../../constants/localStorage.js';
+import useLocalStorage from '../../context/LocalStarageContext/useLocalStorage.js';
 
 const Header = () => {
   const isAuthed = useAuth() === AUTH_STATUS.authed;
   const navLinks = isAuthed ? privateLinks : publicLinks;
 
+  const { removeStorageItem } = useLocalStorage();
+
   const handleLogout = () => {
-    window.localStorage.removeItem(TOKEN);
+    removeStorageItem(TOKEN);
   };
 
   return (
