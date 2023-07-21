@@ -163,30 +163,10 @@ export const login = (req, res) => {
     });
 };
 
-export const checkToken = (req, res) => {
-  const { token } = req.body;
-
-  if (!token) {
-    return res.status(BAD_REQUEST_400).json({
-      error: true,
-      message: 'No auth token.',
-      data: null,
-    });
-  }
-
-  jwt.verify(token, process.env.JWT_SECRET, (error) => {
-    if (error) {
-      return res.status(UNAUTHORIZED_401).json({
-        error: true,
-        message: 'Auth token is not valid',
-        data: null,
-      });
-    }
-
-    return res.status(OK_200).json({
-      error: false,
-      message: 'OK. Token is valid.',
-      data: null,
-    });
+export const checkAuth = (req, res) => {
+  return res.status(OK_200).json({
+    error: false,
+    message: 'OK. Token is valid.',
+    data: null,
   });
 };

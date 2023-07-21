@@ -1,6 +1,7 @@
 import ky from 'ky';
 
 import { TOKEN } from '../constants/localStorage.js';
+import { AUTHORIZATION } from '../constants/headers.js';
 
 const api = ky.extend({
   prefixUrl: import.meta.env.VITE_API_URL,
@@ -13,7 +14,7 @@ const api = ky.extend({
         const token = window.localStorage.getItem(TOKEN);
         if (!token) return;
 
-        request.headers.set('Authorization', `Bearer ${token}`);
+        request.headers.set(AUTHORIZATION, `Bearer ${token}`);
       },
     ],
   },

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import AUTH_STATUS from '../../constants/auth';
 import { TOKEN } from '../../constants/localStorage.js';
 import authContext from './context.js';
-import checkToken from '../../api/auth/checkToken.js';
+import checkAuth from '../../api/auth/checkAuth.js';
 import useLocalStorage from '../LocalStarageContext/useLocalStorage.js';
 
 const AuthProvider = ({ children }) => {
@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
       return;
     }
 
-    checkToken({ token: storageToken })
+    checkAuth()
       .then(() => {
         setAuthStatus(AUTH_STATUS.authed);
       })
