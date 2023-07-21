@@ -6,13 +6,15 @@ const validationScheme = yup.object().shape({
   password: yup
     .string()
     .required('Password is required.')
+    .oneOf([null, yup.ref('passwordRepeat')], 'Password and password repeat do not match.')
     .min(6, 'Password must have 6 characters at least.')
-    .max(16, 'Password should not have more than 16 characters.')
-    .oneOf([null, yup.ref('passwordRepeat')], 'Password and password repeat do not match.'),
+    .max(16, 'Password should not have more than 16 characters.'),
   passwordRepeat: yup
     .string()
     .required('Repeat password is required.')
-    .oneOf([null, yup.ref('password')], 'Password and password repeat do not match.'),
+    .oneOf([null, yup.ref('password')], 'Password and password repeat do not match.')
+    .min(6, 'Password must have 6 characters at least.')
+    .max(16, 'Password should not have more than 16 characters.'),
 });
 
 export default validationScheme;
