@@ -23,9 +23,7 @@ mongoose
 // app middlewares
 app.use(morgan('dev'));
 
-if (process.env.NODE_ENV === 'dev') {
-  app.use(cors());
-}
+app.use(cors({ origin: process.env.CLIENT_URL }));
 
 app.use(bodyParser.json());
 
