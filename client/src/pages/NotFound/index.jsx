@@ -1,9 +1,11 @@
+import { ErrorCode, ErrorMessage, ErrorContainer } from './style';
+
 const NotFound = () => {
   return (
-    <div>
-      <h1>Error 404</h1>
-      <p>page not found</p>
-    </div>
+    <ErrorContainer className="center">
+      <ErrorCode>ERROR 404</ErrorCode>
+      <ErrorMessage>PAGE NOT FOUND</ErrorMessage>
+    </ErrorContainer>
   );
 };
 
