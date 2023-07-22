@@ -1,22 +1,17 @@
-import { useState } from 'react';
-
 import Button from '../../components/Button';
 import Modal from '../../components/Modal';
 import RegistrationForm from '../../forms/RegistrationForm';
-import { InputGroup } from '../Login/style.js';
+import useToggle from '../../hooks/useToggle.js';
 import Input from '../../components/Input';
+import { InputGroup } from '../Login/style.js';
 
 const SignUpEmailButton = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleIsOpen = () => {
-    setIsOpen((prevState) => !prevState);
-  };
+  const [isOpen, toggleOpen] = useToggle(false);
 
   return (
     <>
-      <Button label="Sign Up with Email" onClick={toggleIsOpen} />
-      <Modal isOpen={isOpen} title="Registration" onClose={toggleIsOpen} width="500">
+      <Button label="Sign Up with Email" onClick={toggleOpen} />
+      <Modal isOpen={isOpen} title="Registration" onClose={toggleOpen} width="500">
         <RegistrationForm>
           <InputGroup>
             <Input type="email" placeholder="Email" name="email" />

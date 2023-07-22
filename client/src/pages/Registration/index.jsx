@@ -10,7 +10,7 @@ const Registration = () => {
       <SubTitle>Create new account if you don't have one</SubTitle>
       <SignUpEmailButton />
       <SubTitle>
-        Do you already have an account? Please <Link to="/login">login.</Link>
+        Do you have an account? Please <Link to="/login">login.</Link>
       </SubTitle>
     </Wrapper>
   );
