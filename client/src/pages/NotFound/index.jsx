@@ -2,7 +2,7 @@ import { ErrorCode, ErrorMessage, ErrorContainer } from './style';
 
 const NotFound = () => {
   return (
-    <ErrorContainer className="center">
+    <ErrorContainer>
       <ErrorCode>ERROR 404</ErrorCode>
       <ErrorMessage>PAGE NOT FOUND</ErrorMessage>
     </ErrorContainer>

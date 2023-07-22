@@ -1,22 +1,18 @@
-import RegistrationForm from '../../forms/RegistrationForm/index.jsx';
-import Input from '../../components/Input/index.jsx';
-import { InputGroup, FormWrapper, Title } from './style';
-import Button from '../../components/Button/index.jsx';
+import { Link } from 'react-router-dom';
+
+import { Wrapper, Title, SubTitle } from './style';
+import SignUpEmailButton from './SignUpEmailButton';
 
 const Registration = () => {
   return (
-    <FormWrapper>
-      <RegistrationForm>
-        <Title>Registration</Title>
-        <InputGroup>
-          <Input type="email" placeholder="Email" name="email" />
-          <Input type="text" placeholder="Name" name="name" />
-          <Input type="password" placeholder="Password" name="password" />
-          <Input type="password" placeholder="Repeat password" name="passwordRepeat" />
-        </InputGroup>
-        <Button label="Sign Up" type="submit" />
-      </RegistrationForm>
-    </FormWrapper>
+    <Wrapper>
+      <Title>Registration</Title>
+      <SubTitle>Create new account if you don't have one</SubTitle>
+      <SignUpEmailButton />
+      <SubTitle>
+        Do you already have an account? Please <Link to="/login">login.</Link>
+      </SubTitle>
+    </Wrapper>
   );
 };
 
