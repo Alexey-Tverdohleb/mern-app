@@ -14,7 +14,7 @@ export default function privateRoute(req, res, next) {
     });
   }
 
-  jwt.verify(token, process.env.JWT_SECRET, (error) => {
+  jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
     if (error) {
       return res.status(UNAUTHORIZED_401).json({
         error: true,
@@ -23,6 +23,8 @@ export default function privateRoute(req, res, next) {
       });
     }
 
+    const { _id } = decoded;
+    req.userId = _id;
     next();
   });
 }
