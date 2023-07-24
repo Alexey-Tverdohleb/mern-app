@@ -7,7 +7,9 @@ export const ButtonStyled = styled.button`
   padding: 15px;
   font-weight: 700;
   font-size: 16px;
-  background-color: ${ACCENT_COLOR};
-  border: 1px solid ${ACCENT_COLOR};
+  background-color: ${({ $background }) => $background ?? ACCENT_COLOR};
+  border: 1px solid ${({ $background }) => $background ?? ACCENT_COLOR};
   color: ${TEXT_WHITE};
+  margin-bottom: 15px;
+  cursor: pointer;
 `;
